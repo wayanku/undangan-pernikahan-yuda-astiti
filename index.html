@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anita & Alex Wedding</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/wayanku/pernikahan-tema-4/a973eb6447c5c8ed8c8aa1fa0376c7b7cad6fd63/886f7e3b-ae7e-4ad6-80c6-cc2fef6c7e32.JPG">
+    <!-- Meta Tags untuk WhatsApp & Social Media Preview (Open Graph) -->
+    <meta property="og:title" content="The Wedding of Anita & Alex">
+    <meta property="og:description" content="Minggu, 17 Oktober 2027 | Seoul, Korea">
+    <meta property="og:image" content="https://raw.githubusercontent.com/wayanku/pernikahan-tema-4/a973eb6447c5c8ed8c8aa1fa0376c7b7cad6fd63/886f7e3b-ae7e-4ad6-80c6-cc2fef6c7e32.JPG">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Animasi AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-pink: #e5e5e5; /* Elegant Silver/Gray */
+            --main-pink: #4a4a4a; /* Charcoal Gray */
+            --text-dark: #2d2d2d; /* Soft Dark Gray */
+            --accent-gold: #bfa06b; /* Muted Gold for accents */
+        }
+        html, body {
+            overflow-x: hidden; /* Kunci mutlak agar tidak bisa scroll samping */
+            width: 100%;
+            overscroll-behavior-x: none; /* Mencegah efek 'membal' atau swipe gesture browser */
+        }
+        body {
+            font-family: 'Playfair Display', serif; /* Ubah font utama untuk kesan retro */
+            background-color: #ffffff;
+            color: var(--text-dark);
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-cursive { font-family: 'Great Vibes', cursive; }
+        
+        /* Hero Section Gradient Overlay */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        /* Global Image Filter for Retro Look */
+        img {
+            /* Filter global dihapus agar foto utama (profil/story) berwarna natural */
+        }
+
+        /* Hero Slideshow Animation (Ken Burns Effect) */
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1);
+            transition: opacity 2s ease-in-out, transform 10s linear;
+            z-index: 0;
+            filter: grayscale(100%) contrast(110%); /* Background tetap B&W untuk nuansa dramatis */
+        }
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        /* Vertical Text Style */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        .text-pink-theme { color: var(--accent-gold); }
+        .bg-pink-theme { background-color: var(--main-pink); }
+        .border-pink-theme { border-color: var(--main-pink); }
+
+        /* Floating Animation for Music Icon */
+        @keyframes rotate-music {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .music-spin {
+            animation: rotate-music 4s linear infinite;
+        }
+
+        /* Border Box */
+        .outline-button {
+            border: 2px solid var(--main-pink);
+            padding: 10px 28px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--main-pink);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Card Shadow & Radius */
+        .custom-card {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Softer, more elegant shadow */
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        /* Input Styles */
+        .custom-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .custom-input:focus {
+            border-color: var(--main-pink);
+        }
+
+        /* Gallery Grid Styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 3 / 4;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- Story Love / Timeline Styles (UPDATED) --- */
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 20px; /* Garis di sisi kiri (Mobile friendly) */
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        .timeline-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 0%;
+            background-color: var(--main-pink);
+            box-shadow: none;
+            transition: height 0.5s ease;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 50px; /* Memberi ruang untuk garis di kiri */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .timeline-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dot Timeline di Kiri */
+        .timeline-dot {
+            position: absolute;
+            left: 7px; /* Center terhadap garis width 3px di left 20px -> (20 + 1.5) - (30/2) */
+            top: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: #ffffff;
+            border: 2px solid var(--main-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .timeline-dot svg {
+            width: 14px;
+            height: 14px;
+            color: var(--main-pink);
+        }
+        .timeline-item.active .timeline-dot {
+            background-color: var(--main-pink);
+            border-color: var(--main-pink);
+            transform: scale(1.2);
+        }
+        .timeline-item.active .timeline-dot svg {
+            color: #ffffff;
+            animation: heart-pulse 1.5s infinite;
+        }
+
+        /* Story Card Style Baru */
+        .story-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+        .story-img-wrapper {
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .story-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top; /* Fokus ke bagian atas foto agar wajah tidak terpotong */
+            transition: transform 0.7s ease;
+        }
+        .story-card:hover .story-img-wrapper img {
+            transform: scale(1.1);
+        }
+        .story-content {
+            padding: 20px;
+            text-align: left;
+            position: relative;
+        }
+        /* Panah kecil menunjuk ke dot */
+        .story-card::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 28px;
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 8px solid white;
+        }
+
+        .story-date {
+            display: inline-block;
+            background: var(--main-pink);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes heart-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Badge Tanggal Timeline */
+        .timeline-date-badge {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--main-pink);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .timeline-item.active .timeline-date-badge {
+            background: white;
+            color: var(--main-pink);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--main-pink); border-radius: 10px; }
+
+        /* --- VERTICAL TEXT STYLE (SAMA PERSIS FOTO) --- */
+        .vertical-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .v-text-pink {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Playfair Display', serif;
+            font-size: 55px;
+            color: var(--main-pink);
+            font-weight: 400;
+            line-height: 1;
+        }
+        .v-text-dark {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #666;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        /* --- CARD STYLE (SAMA PERSIS FOTO) --- */
+        .custom-card-frame {
+            background: white;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 2px;
+            width: 100%;
+        }
+        .info-border-box {
+            border: 1px solid #666; /* Ubah border hitam pekat jadi abu tua */
+            margin-top: -4px; /* Menempel sedikit ke foto */
+            padding: 20px 15px;
+            text-align: center;
+            background: white;
+        }
+
+        /* --- WISHES LIST STYLE --- */
+        .wishes-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 30px;
+            padding: 10px;
+        }
+        .wish-card {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s;
+        }
+        .wish-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .wish-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--soft-pink);
+            color: var(--main-pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+            font-family: 'Playfair Display', serif;
+        }
+        .wish-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.2;
+        }
+        .wish-date {
+            font-size: 10px;
+            color: #999;
+            display: block;
+            margin-top: 2px;
+        }
+        .wish-message {
+            font-size: 13px;
+            color: #555;
+            margin-top: 8px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+        .wish-badge {
+            font-size: 9px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        } 
+        .wish-badge.hadir { background: #4a4a4a; color: #fff; } /* Charcoal */
+        .wish-badge.tidak { background: #d1d1d1; color: #444; } /* Light Gray */
+
+        /* --- Merged Grid Gallery --- */
+        .merged-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px; /* Memberi jarak antar foto */
+            width: 100%;
+            /* Styling dipindah ke item */
+        }
+        .merged-gallery-item img {
+            width: 100%;
+            height: 250px; /* Tinggi tetap agar rapi */
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(100%); /* Galeri default B&W */
+        }
+        .merged-gallery-item:hover img {
+            transform: scale(1.1);
+            z-index: 10;
+            position: relative;
+            filter: grayscale(0%); /* Berwarna saat disentuh/hover */
+        }
+
+        /* --- Film Roll Gallery --- */
+        .film-roll-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .film-roll-track {
+            display: flex;
+            gap: 0; /* Foto menyatu */
+            width: max-content;
+            animation: film-roll-marquee 40s linear infinite; /* Durasi diperlambat */
+        }
+        .film-roll-item {
+            flex-shrink: 0;
+            width: 180px; /* Sedikit lebih kecil */
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .film-roll-item:hover img {
+            filter: grayscale(0%);
+        }
+        .film-roll-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); /* Film roll B&W */
+            transition: filter 0.3s ease;
+        }
+        @keyframes film-roll-marquee {
+            from { transform: translateX(0%); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Story Love Slideshow Background */
+        #story-slider-track {
+            display: flex;
+            height: 100%;
+            width: max-content;
+            animation: marquee 40s linear infinite;
+        }
+        .story-slide-image {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            /* Bergerak cepat di paruh pertama, lalu melambat di paruh kedua */
+            50% { transform: translateX(-35%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- New Gift Card Style --- */
+        .bank-card {
+            background: #ffffff;
+            border: 1px solid #777; /* Border abu-abu */
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-align: left;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.05);
+        }
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            border-color: var(--main-pink);
+        }
+        /* Pattern or texture for card */
+        .bank-card::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .copy-btn {
+            background: white;
+            color: var(--text-dark);
+            border: 1px solid #e5e7eb;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background: var(--main-pink);
+            color: white;
+            border-color: var(--main-pink);
+        }
+        .copy-btn.copied {
+            background: #555; /* Abu-abu tua saat tersalin */
+            color: white;
+            border-color: #555;
+        }
+
+        /* --- LUXURY OPENING STYLE --- */
+        /* Particles Background */
+        .particles-container {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: float-up linear infinite;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        .luxury-card {
+            background: rgba(20, 20, 20, 0.5); /* Lebih gelap agar teks tetap jelas */
+            backdrop-filter: blur(3px); /* Blur dikurangi agar background lebih terlihat */
+            -webkit-backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 50px 30px;
+            border-radius: 4px; /* Sudut sedikit tegas agar terlihat klasik mewah */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
+            max-width: 450px;
+            width: 90%; /* Agar tidak mepet pinggir di HP */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Inner Border Decoration (Garis Hiasan Dalam) */
+        .luxury-card::after {
+            content: '';
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+        }
+        
+        /* Efek Kilau Halus di Card */
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine-card 6s infinite;
+        }
+        @keyframes shine-card {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* Luxury Button */
+        .btn-luxury {
+            background: #4a4a4a; /* Charcoal Gray */
+            color: white;
+            padding: 12px 35px; /* Diperkecil dari 16px 50px */
+            border-radius: 50px;
+            font-size: 12px; /* Diperkecil dari 13px */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            animation: pulse-glow 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-luxury:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            filter: brightness(1.1);
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(200, 200, 200, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(200, 200, 200, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(200, 200, 200, 0); }
+        }
+
+        /* Animasi Exit Slide Up */
+        .slide-up-exit {
+            transform: translateY(-100%);
+            opacity: 1 !important; /* Override default opacity fade */
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #modal-image {
+            filter: grayscale(100%) contrast(110%); /* Cover depan tetap B&W */
+        }
+    </style>
+</head>
+<body class="antialiased overflow-hidden">
+
+    <!-- Container Utama -->
+    <div class="max-w-md mx-auto bg-white min-h-screen relative shadow-2xl">
+        
+        <!-- Opening Modal (Cover) -->
+        <div id="opening-modal" class="fixed inset-0 z-[9999] bg-gray-900 flex flex-col items-center justify-center transition-all duration-1000 overflow-hidden">
+            <div id="modal-image" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-60"></div>
+            <div class="absolute inset-0 bg-gray-900/60"></div> <!-- Overlay lebih gelap untuk kontras -->
+            <div id="particles-js" class="particles-container"></div> <!-- Container Partikel -->
+            
+            <div class="relative z-10 flex justify-center w-full" data-aos="fade-up" data-aos-duration="1500">
+                <div class="luxury-card text-center">
+                    <p class="font-serif text-white tracking-[0.4em] text-[10px] md:text-xs mb-6 uppercase opacity-90">The Wedding Of</p>
+                    
+                    <!-- Nama Mempelai: Ukuran disesuaikan (4xl di HP, 6xl di PC) agar aman -->
+                    <h1 class="font-cursive text-5xl md:text-7xl text-white mb-8 drop-shadow-2xl leading-snug py-2" style="text-shadow: 0 4px 10px rgba(0,0,0,0.3);">Anita & Alex</h1>
+                    
+                    <!-- Garis Pemisah Elegan -->
+                    <div class="h-[1px] w-24 bg-gradient-to-r from-transparent via-white to-transparent mx-auto mb-8 opacity-70"></div>
+
+                    <div class="mb-8 text-white animate__animated animate__fadeInUp animate__delay-1s">
+                        <p class="font-serif text-[11px] italic mb-3 opacity-90 tracking-wide">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                        <h2 id="guest-name" class="text-xl font-bold tracking-widest uppercase border-b border-white/20 inline-block pb-2">Tamu Undangan</h2>
+                    </div>
+                    
+                    <button id="btn-open" class="btn-luxury flex items-center gap-3 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
+                        Buka Undangan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Musik & Floating Elements -->
+        <div class="fixed bottom-6 left-6 z-50">
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-200 cursor-pointer music-spin transition-transform hover:scale-110" id="musicToggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#4a4a4a" viewBox="0 0 16 16">
+                    <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/><path fill-rule="evenodd" d="M9 3v10H8V3h1z"/><path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- SECTION 1: HERO -->
+        <section class="relative h-[110vh] overflow-hidden">
+            <div id="hero-slideshow" class="absolute inset-0 w-full h-full bg-gray-900 animate__animated animate__zoomIn"></div>
+            <div class="absolute inset-0 hero-overlay flex flex-col items-center justify-end pb-16 text-center px-6">
+                <h1 class="font-cursive text-5xl md:text-6xl text-white mb-10 drop-shadow-lg" data-aos="fade-up">Anita & Alex</h1>
+                
+                <!-- Countdown -->
+                <div class="grid grid-cols-4 gap-4 text-white mb-12 w-full max-w-[300px] drop-shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex flex-col"><span class="text-2xl font-bold" id="days">00</span><span class="text-[9px] uppercase tracking-[0.2em] font-semibold opacity-80">Hari</span></div>
+                    <div class="flex flex-col"><span class="text-2xl font-bold" id="hours">00</span><span class="text-[9px] uppercase tracking-[0.2em] font-semibold opacity-80">Jam</span></div>
+                    <div class="flex flex-col"><span class="text-2xl font-bold" id="minutes">00</span><span class="text-[9px] uppercase tracking-[0.2em] font-semibold opacity-80">Menit</span></div>
+                    <div class="flex flex-col"><span class="text-2xl font-bold" id="seconds">00</span><span class="text-[9px] uppercase tracking-[0.2em] font-semibold opacity-80">Detik</span></div>
+                </div>
+
+                <p class="text-[13px] text-white leading-relaxed mb-10 px-6 font-medium italic drop-shadow-md" data-aos="fade-up" data-aos-delay="400">
+                    "Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami."
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BRIDE -->
+        <section class="pt-20 pb-4 px-4 bg-white overflow-hidden">
+            <div class="flex items-center gap-4">
+                <!-- Sisi Kiri: Tulisan Vertikal -->
+                <div class="vertical-container" data-aos="fade-right">
+                    <div class="v-text-dark">The</div>
+                    <div class="v-text-pink">Bride</div>
+                </div>
+                
+                <!-- Sisi Kanan: Kartu Foto -->
+                <div class="flex-1" data-aos="fade-left">
+                    <div class="custom-card-frame">
+                        <img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/C5762B2C-4F4B-4C05-8659-16054955C893.PNG?raw=true" class="w-full h-auto" alt="Anita">
+                        <div class="info-border-box">
+                            <h3 class="font-serif italic text-3xl text-gray-800 mb-2" style="font-family: 'Great Vibes', cursive;">Anita Septiani</h3>
+                            <a href="https://www.instagram.com/storybali?igsh=MTJtOTgwaTY4YWU1ag%3D%3D&utm_source=qr" target="_blank" class="flex items-center justify-center gap-1 text-pink-theme mb-4 hover:opacity-80 transition-opacity">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.232-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.047-1.096-.047-3.232 0-2.136.009-2.388.047-3.231.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+                                <span class="text-xs font-medium">@anitaseptiani</span>
+                            </a>
+                            <p class="text-[12px] italic text-gray-500 mb-1">Putri Bungsu Dari</p>
+                            <p class="text-[13px] font-bold text-gray-800">Bapak Rohmat dan Ibu Turniasih</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: GROOM -->
+        <section class="pt-4 pb-20 px-4 bg-white overflow-hidden">
+            <div class="flex items-center gap-4 flex-row-reverse">
+                <!-- Sisi Kanan: Tulisan Vertikal -->
+                <div class="vertical-container" data-aos="fade-left">
+                    <div class="v-text-dark" style="transform: rotate(0deg); writing-mode: vertical-lr;">The</div>
+                    <div class="v-text-pink" style="transform: rotate(0deg); writing-mode: vertical-lr;">Groom</div>
+                </div>
+                
+                <!-- Sisi Kiri: Kartu Foto -->
+                <div class="flex-1" data-aos="fade-right">
+                    <div class="custom-card-frame">
+                        <img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/E89CD028-2408-495E-A283-CE6208917298.PNG?raw=true" class="w-full h-auto" alt="Alex">
+                        <div class="info-border-box">
+                            <h3 class="font-serif italic text-3xl text-gray-800 mb-2" style="font-family: 'Great Vibes', cursive;">Alexander</h3>
+                            <a href="https://www.instagram.com/storybali?igsh=MTJtOTgwaTY4YWU1ag%3D%3D&utm_source=qr" target="_blank" class="flex items-center justify-center gap-1 text-pink-theme mb-4 hover:opacity-80 transition-opacity">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.232-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.047-1.096-.047-3.232 0-2.136.009-2.388.047-3.231.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+                                <span class="text-xs font-medium">@alexander</span>
+                            </a>
+                            <p class="text-[12px] italic text-gray-500 mb-1">Putra Bungsu Dari</p>
+                            <p class="text-[13px] font-bold text-gray-800">Bapak Andre dan Ibu Tuti</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: JADWAL & LOKASI -->
+        <section class="bg-white pb-24 overflow-hidden">
+            <div class="text-center py-12" data-aos="zoom-in">
+                <h2 class="font-serif text-4xl text-pink-theme italic tracking-wide">Save The Date</h2>
+            </div>
+            
+            <!-- Akad -->
+            <div class="px-6 mb-10" data-aos="fade-up">
+                <div class="bg-white custom-card">
+                    <div class="p-2">
+                        <img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/03913430-4059-4A5E-8CB8-103FE8C2F7D1.PNG?raw=true" alt="[Detail Akad]" class="w-full h-56 object-cover object-top">
+                    </div>
+                    <div class="px-4 pb-6">
+                        <div class="border border-gray-500 p-4">
+                            <div class="flex items-center">
+                                <div class="pr-4 md:pr-8 border-r border-gray-300 flex items-center">
+                                    <h3 class="vertical-text font-serif text-3xl text-pink-theme opacity-80">Akad Nikah</h3>
+                                </div>
+                                <div class="flex-1 pl-4 md:pl-8 text-center">
+                                    <p class="text-xs font-semibold text-gray-400 mb-1">Minggu</p>
+                                    <p class="text-5xl font-serif text-gray-700 mb-2">17</p>
+                                    <p class="text-sm uppercase tracking-widest font-semibold text-gray-500 mb-4">Oktober 2027</p>
+                                    <p class="text-xs font-bold text-gray-700">09.00 WITA - Selesai</p>
+                                    <p class="text-xs text-gray-400 mt-4 italic">Seoul, Korea</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resepsi -->
+            <div class="px-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-white custom-card">
+                    <div class="p-4 md:p-8 pb-0">
+                        <div class="border border-gray-500 p-4">
+                            <div class="flex items-center">
+                                <div class="flex-1 pr-4 md:pr-8 text-center">
+                                    <p class="text-xs font-semibold text-gray-400 mb-1">Minggu</p>
+                                    <p class="text-5xl font-serif text-gray-700 mb-2">17</p>
+                                    <p class="text-sm uppercase tracking-widest font-semibold text-gray-500 mb-4">Oktober 2027</p>
+                                    <p class="text-xs font-bold text-gray-700">11.00 WITA - Selesai</p>
+                                    <p class="text-xs text-gray-400 mt-4 italic">Seoul, Korea</p>
+                                </div>
+                                <div class="pl-4 md:pl-8 border-l border-gray-300 flex items-center">
+                                    <h3 class="vertical-text font-serif text-3xl text-pink-theme opacity-80" style="transform: rotate(0deg); writing-mode: vertical-lr;">Resepsi</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Seoul,Korea" target="_blank" class="w-full bg-pink-theme text-white py-4 text-xs font-bold uppercase tracking-widest flex justify-center items-center gap-2 rounded-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                            Lihat Peta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION STORY LOVE (UPDATED WITH CARDS) -->
+        <section class="relative bg-gray-900 min-h-[160vh]">
+            <!-- Background Slideshow -->
+            <div class="sticky top-0 h-screen w-full overflow-hidden z-0">
+                <div class="absolute inset-0 overflow-hidden" style="mask-image: linear-gradient(to right, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);">
+                    <div id="story-slider-track" class="flex h-full">
+                        <!-- Images will be injected by JS -->
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
+            </div>
+
+            <!-- Timeline Content -->
+            <div class="relative z-10 -mt-[100vh] py-24 px-4 min-h-[180vh]">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="font-serif text-4xl text-white italic">Story Love</h2>
+                    <div class="h-[1px] w-12 bg-gray-400 mx-auto mt-4"></div>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Line Progress -->
+                    <div class="timeline-line">
+                        <div class="timeline-progress" id="progressLine"></div>
+                    </div>
+                    
+                    <!-- Timeline 1: Pertemuan -->
+                    <div class="timeline-item js-timeline-item">
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748z"/></svg>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-img-wrapper">
+                                <img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/5685A9BC-740D-4684-96C2-C6054AC918A2.PNG?raw=true" alt="Pertemuan">
+                            </div>
+                            <div class="story-content">
+                                <span class="story-date">1 Mei 2018</span>
+                                <h4 class="font-serif text-2xl font-bold mb-3 text-gray-800">Pertemuan Pertama</h4>
+                                <p class="text-sm leading-relaxed text-gray-600">Pertemuan manis di bangku perkuliahan. Saling bertukar sapa dan merasa ada kecocokan yang tak terduga sejak saat itu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline 2: Hubungan -->
+                    <div class="timeline-item js-timeline-item">
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748z"/></svg>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-img-wrapper">
+                                <img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/575DA215-5384-4B75-B68C-A81F15CAECE2.PNG?raw=true" alt="Hubungan">
+                            </div>
+                            <div class="story-content">
+                                <span class="story-date">1 Juni 2018</span>
+                                <h4 class="font-serif text-2xl font-bold mb-3 text-gray-800">Menjalin Hubungan</h4>
+                                <p class="text-sm leading-relaxed text-gray-600">Setelah satu bulan saling mengenal, kami memutuskan untuk mengikat komitmen serius dan melangkah bersama.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline 3: Lamaran -->
+                    <div class="timeline-item js-timeline-item">
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748z"/></svg>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-img-wrapper">
+                                <img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/22966DD5-472D-4144-AD20-DC03E34EF221.PNG?raw=true" alt="Lamaran">
+                            </div>
+                            <div class="story-content">
+                                <span class="story-date">1 Juli 2027</span>
+                                <h4 class="font-serif text-2xl font-bold mb-3 text-gray-800">Lamaran</h4>
+                                <p class="text-sm leading-relaxed text-gray-600">Di hari yang cerah, Alex memberanikan diri untuk melamar Anita. Sebuah langkah besar menuju ikatan suci pernikahan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GALERI FOTO -->
+        <section class="py-20 bg-[#f9f9f9] overflow-hidden">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <h2 class="font-serif text-4xl text-pink-theme italic">Momen Bahagia</h2>
+                <div class="h-[1px] w-20 bg-gray-600 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="px-4 mb-12" data-aos="fade-up"> 
+                <div class="merged-gallery-grid">
+                    <!-- 2 Kolom x 4 Baris = 8 Foto -->
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/03913430-4059-4A5E-8CB8-103FE8C2F7D1.PNG?raw=true" alt="Galeri 1"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/22966DD5-472D-4144-AD20-DC03E34EF221.PNG?raw=true" alt="Galeri 2"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/5685A9BC-740D-4684-96C2-C6054AC918A2.PNG?raw=true" alt="Galeri 3"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/575DA215-5384-4B75-B68C-A81F15CAECE2.PNG?raw=true" alt="Galeri 4"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/E89CD028-2408-495E-A283-CE6208917298.PNG?raw=true" alt="Galeri 5"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/C5762B2C-4F4B-4C05-8659-16054955C893.PNG?raw=true" alt="Galeri 6"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/03913430-4059-4A5E-8CB8-103FE8C2F7D1.PNG?raw=true" alt="Galeri 7"></div>
+                    <div class="merged-gallery-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/22966DD5-472D-4144-AD20-DC03E34EF221.PNG?raw=true" alt="Galeri 8"></div>
+                </div>
+            </div>
+
+            <!-- Film Roll Layout -->
+            <div class="film-roll-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="film-roll-track">
+                    <!-- Images (doubled for seamless loop) -->
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/03913430-4059-4A5E-8CB8-103FE8C2F7D1.PNG?raw=true" alt="Galeri Roll 1"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/22966DD5-472D-4144-AD20-DC03E34EF221.PNG?raw=true" alt="Galeri Roll 2"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/5685A9BC-740D-4684-96C2-C6054AC918A2.PNG?raw=true" alt="Galeri Roll 3"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/575DA215-5384-4B75-B68C-A81F15CAECE2.PNG?raw=true" alt="Galeri Roll 4"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/E89CD028-2408-495E-A283-CE6208917298.PNG?raw=true" alt="Galeri Roll 5"></div>
+                    <!-- Duplicates -->
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/03913430-4059-4A5E-8CB8-103FE8C2F7D1.PNG?raw=true" alt="Galeri Roll 1"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/22966DD5-472D-4144-AD20-DC03E34EF221.PNG?raw=true" alt="Galeri Roll 2"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/5685A9BC-740D-4684-96C2-C6054AC918A2.PNG?raw=true" alt="Galeri Roll 3"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/575DA215-5384-4B75-B68C-A81F15CAECE2.PNG?raw=true" alt="Galeri Roll 4"></div>
+                    <div class="film-roll-item"><img src="https://github.com/wayanku/pernikahan-tema-4/blob/main/E89CD028-2408-495E-A283-CE6208917298.PNG?raw=true" alt="Galeri Roll 5"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: VIDEO YOUTUBE -->
+        <section class="py-20 bg-[#f9f9f9] px-4 overflow-hidden">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <h2 class="font-serif text-4xl text-pink-theme italic">Our Memories</h2>
+                <div class="h-[1px] w-20 bg-gray-600 mx-auto mt-4"></div>
+            </div>
+            <div class="max-w-lg mx-auto" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-white p-2 rounded-sm shadow-lg">
+                     <div class="aspect-video rounded-sm overflow-hidden">
+                        <iframe 
+                            class="w-full h-full" 
+                            width="560" 
+                            height="315" 
+                            src="https://www.youtube.com/embed/JoIu-xxmEPo?si=jPnHNTecdV9sU4bA&amp;controls=0" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: KIRIM HADIAH (UPDATED) -->
+        <section class="py-20 px-6 bg-white text-center overflow-hidden">
+            <div data-aos="fade-up">
+                <h2 class="font-serif text-4xl text-pink-theme italic">Kirim Hadiah</h2>
+                <div class="h-[1px] w-20 bg-gray-600 mx-auto mt-4 mb-6"></div>
+                <p class="text-xs text-gray-500 mt-4 max-w-xs mx-auto mb-8 leading-relaxed">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara digital.</p>
+                
+                <button id="btnGift" class="bg-pink-theme text-white py-3 px-8 rounded-full font-bold text-sm shadow-lg shadow-gray-200 hover:bg-gray-800 transition flex items-center gap-2 mx-auto transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/></svg>
+                    Kirim Hadiah
+                </button>
+            </div>
+            
+            <!-- Detail Hadiah (Hidden by default) -->
+            <div id="gift-details" class="hidden mt-10 max-w-sm mx-auto" data-aos="fade-up">
+                
+                <div class="space-y-6 animate__animated animate__fadeInUp">
+                    
+                    <!-- Kartu BCA -->
+                    <div class="bank-card">
+                        <div class="flex justify-between items-start mb-6">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" class="h-6 object-contain" alt="BCA">
+                            <span class="text-[10px] text-gray-400 font-semibold tracking-widest uppercase">Debit Card</span>
+                        </div>
+                        <div class="mb-6">
+                            <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-wider">Nomor Rekening</p>
+                            <p class="text-xl font-mono text-gray-700 tracking-widest font-bold" id="bca-number">1234567890</p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-gray-400 text-[10px] mb-0.5 uppercase tracking-wider">Atas Nama</p>
+                                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">Anita Septiani</p>
+                            </div>
+                            <button onclick="copyToClipboard(this, 'bca-number')" class="copy-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>
+                                Salin
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Mandiri -->
+                    <div class="bank-card">
+                        <div class="flex justify-between items-start mb-6">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg" class="h-8 object-contain" alt="Mandiri">
+                            <span class="text-[10px] text-gray-400 font-semibold tracking-widest uppercase">Debit Card</span>
+                        </div>
+                        <div class="mb-6">
+                            <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-wider">Nomor Rekening</p>
+                            <p class="text-xl font-mono text-gray-700 tracking-widest font-bold" id="mandiri-number">0987654321</p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-gray-400 text-[10px] mb-0.5 uppercase tracking-wider">Atas Nama</p>
+                                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">Alexander</p>
+                            </div>
+                            <button onclick="copyToClipboard(this, 'mandiri-number')" class="copy-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>
+                                Salin
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kado Fisik -->
+                    <div class="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-6 text-left">
+                        <div class="flex items-center gap-3 mb-3"> 
+                            <div class="bg-gray-200 p-2 rounded-full text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/></svg>
+                            </div>
+                            <h4 class="font-bold text-gray-700 text-sm">Kirim Kado Fisik</h4>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                            Jl. Mawar Melati Indah No. 12, Komp. Griya Asri, Makassar, Sulawesi Selatan.
+                        </p>
+                        <button onclick="copyToClipboard(this, 'address-text')" class="text-xs text-gray-600 font-bold hover:underline flex items-center gap-1">
+                            Salin Alamat
+                        </button>
+                        <span id="address-text" class="hidden">Jl. Mawar Melati Indah No. 12, Komp. Griya Asri, Makassar, Sulawesi Selatan</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: RSVP & UCAPAN -->
+        <section class="py-20 px-6 bg-white overflow-hidden">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="font-cursive text-5xl text-pink-theme">Wishes & RSVP</h2>
+            </div>
+
+            <!-- Form RSVP -->
+            <form id="rsvpForm" class="space-y-4" data-aos="fade-up">
+                <input type="text" name="nama" placeholder="Nama Lengkap" class="custom-input" required>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <select name="kehadiran" class="custom-input text-gray-500" required>
+                        <option value="">Kehadiran</option>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                    </select>
+                    <select name="jumlah" class="custom-input text-gray-500">
+                        <option value="1">1 Orang</option>
+                        <option value="2">2 Orang</option>
+                    </select>
+                </div>
+
+                <textarea name="ucapan" placeholder="Ucapan & Doa Restu" rows="4" class="custom-input" required></textarea>
+                <button type="submit" id="btnKirim" class="w-full bg-pink-theme text-white py-3 rounded-lg font-bold text-sm shadow-lg shadow-gray-400 hover:bg-gray-800 transition">Kirim Ucapan</button>
+            </form>
+
+            <!-- Daftar Ucapan -->
+            <div id="wishesList" class="wishes-container" data-aos="fade-up">
+                <p class="text-center text-gray-400 text-xs italic">Memuat ucapan...</p>
+            </div>
+        </section>
+
+        <!-- SECTION: CLOSING / TERIMA KASIH -->
+        <section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://github.com/wayanku/pernikahan-tema-4/blob/main/C5762B2C-4F4B-4C05-8659-16054955C893.PNG?raw=true');"></div>
+            
+            <!-- Pink Gradient Overlay -->
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #1a1a1a 0%, rgba(26,26,26,0.8) 50%, rgba(26,26,26,0.4) 100%);"></div>
+            
+            <!-- Content -->
+            <div class="relative z-10 text-center text-white px-6" data-aos="fade-up">
+                <h2 class="font-cursive text-6xl mb-4 drop-shadow-lg">Terima Kasih</h2>
+                <p class="font-serif text-sm md:text-base italic opacity-95 drop-shadow-md max-w-lg mx-auto leading-relaxed">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
+                <div class="mt-8 font-serif text-3xl font-bold drop-shadow-md">Anita & Alex</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-white py-16 text-center">
+            <p class="text-[11px] text-gray-300 uppercase tracking-[0.5em] mb-6">Anita & Alex Wedding</p>
+            <div class="flex flex-col items-center gap-2">
+                <p class="text-[10px] text-gray-400">Dibuat dengan ❤️ oleh StoryBali Undangan</p>
+                <a href="https://www.instagram.com/storybali?igsh=MTJtOTgwaTY4YWU1ag%3D%3D&utm_source=qr" target="_blank" class="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.232-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.047-1.096-.047-3.232 0-2.136.009-2.388.047-3.231.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+                    <span class="text-[10px] font-semibold">@storybali</span>
+                </a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Hidden Audio -->
+    <audio id="music" loop>
+        <source src="https://peljkofgteuqedzfjlhi.supabase.co/storage/v1/object/public/mancing%20jepang/Alex_Warren_-_Ordinary_(Official_Lyric_Video)_128k.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS
+        AOS.init({
+            duration: 1000,
+            once: false,
+            offset: 100
+        });
+
+        // Story Love Animation Observer
+        const timelineItems = document.querySelectorAll('.js-timeline-item');
+        const progressLine = document.getElementById('progressLine');
+        
+        const observerOptions = {
+            threshold: 0.6, // Aktif saat 60% item terlihat
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Update progress line berdasarkan index
+                    const allItems = Array.from(timelineItems);
+                    const index = allItems.indexOf(entry.target);
+                    const progress = ((index + 1) / allItems.length) * 100;
+                    progressLine.style.height = `${progress}%`;
+                }
+            });
+        }, observerOptions);
+
+        timelineItems.forEach(item => timelineObserver.observe(item));
+
+        // Countdown Logic
+        const targetDate = new Date("Oct 17, 2027 09:00:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            document.getElementById("days").innerText = d < 10 ? '0'+d : (d < 0 ? '00' : d);
+            document.getElementById("hours").innerText = h < 10 ? '0'+h : (h < 0 ? '00' : h);
+            document.getElementById("minutes").innerText = m < 10 ? '0'+m : (m < 0 ? '00' : m);
+            document.getElementById("seconds").innerText = s < 10 ? '0'+s : (s < 0 ? '00' : s);
+        }
+        setInterval(updateCountdown, 1000);
+
+        // Music Toggle Logic
+        const music = document.getElementById('music');
+        const musicToggle = document.getElementById('musicToggle');
+        const btnOpen = document.getElementById('btn-open');
+        const modal = document.getElementById('opening-modal');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicToggle.classList.remove('music-spin');
+            } else {
+                music.play();
+                musicToggle.classList.add('music-spin');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Open Invitation Logic
+        btnOpen.addEventListener('click', () => {
+            // PERBAIKAN: Paksa scroll ke paling atas halaman setiap kali undangan dibuka
+            window.scrollTo(0, 0);
+
+            music.play();
+            isPlaying = true;
+            musicToggle.classList.add('music-spin');
+            
+            // Ganti efek fade biasa dengan Slide Up
+            modal.classList.add('slide-up-exit');
+            
+            // Hapus overflow hidden pada body setelah animasi selesai
+            setTimeout(() => {
+                document.body.classList.remove('overflow-hidden');
+                modal.style.display = 'none'; // Sembunyikan elemen sepenuhnya
+                AOS.refresh();
+            }, 1200); // Sesuaikan dengan durasi transisi CSS
+        });
+
+        // Image Slideshow Logic
+        const images = [
+            "https://github.com/wayanku/pernikahan-tema-4/blob/main/03913430-4059-4A5E-8CB8-103FE8C2F7D1.PNG?raw=true",
+            "https://github.com/wayanku/pernikahan-tema-4/blob/main/22966DD5-472D-4144-AD20-DC03E34EF221.PNG?raw=true",
+            "https://github.com/wayanku/pernikahan-tema-4/blob/main/5685A9BC-740D-4684-96C2-C6054AC918A2.PNG?raw=true",
+            "https://github.com/wayanku/pernikahan-tema-4/blob/main/575DA215-5384-4B75-B68C-A81F15CAECE2.PNG?raw=true"
+        ];
+        
+        const heroSlideshow = document.getElementById('hero-slideshow');
+        const modalImage = document.getElementById('modal-image');
+        let currentImageIndex = 0;
+
+        // Setup Hero Slideshow (Create Divs)
+        if (heroSlideshow) {
+            images.forEach((img, i) => {
+                const div = document.createElement('div');
+                div.className = `hero-slide ${i === 0 ? 'active' : ''}`;
+                div.style.backgroundImage = `url(${img})`;
+                heroSlideshow.appendChild(div);
+            });
+        }
+
+        // Set initial modal image
+        if (modalImage) modalImage.style.backgroundImage = `url(${images[0]})`;
+
+        function changeHeroImage() {
+            const slides = document.querySelectorAll('.hero-slide');
+            if (slides.length > 0) {
+                slides[currentImageIndex].classList.remove('active');
+                currentImageIndex = (currentImageIndex + 1) % slides.length;
+                slides[currentImageIndex].classList.add('active');
+            }
+            
+            // Sync Modal Image (Simple transition)
+            if(modalImage) {
+                modalImage.style.backgroundImage = `url(${images[currentImageIndex]})`;
+            }
+        }
+
+        setInterval(changeHeroImage, 5000); // Change image every 5 seconds
+
+        // --- STORY LOVE SLIDESHOW ---
+        const storySliderTrack = document.getElementById('story-slider-track');
+
+        if (storySliderTrack) {
+            // Duplicate images for seamless loop
+            const loopImages = [...images, ...images];
+            loopImages.forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.className = 'story-slide-image';
+                storySliderTrack.appendChild(img);
+            });
+        }
+
+        // --- GIFT SECTION (UPDATED) ---
+        const btnGift = document.getElementById('btnGift');
+        const giftDetails = document.getElementById('gift-details');
+
+        if (btnGift) {
+            btnGift.addEventListener('click', () => {
+                const isHidden = giftDetails.classList.contains('hidden');
+                if (isHidden) {
+                    giftDetails.classList.remove('hidden');
+                    btnGift.innerHTML = 'Tutup Tampilan';
+                    // Scroll to details smoothly
+                    setTimeout(() => {
+                        giftDetails.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                } else {
+                    giftDetails.classList.add('hidden');
+                    btnGift.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/></svg> Kirim Hadiah`;
+                } 
+            });
+        }
+
+        function copyToClipboard(button, elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                // Visual feedback on button
+                const originalText = button.innerHTML;
+                button.innerHTML = 'Tersalin!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                alert('Gagal menyalin.');
+            });
+        }
+
+        // --- INTEGRASI GOOGLE SHEET (RSVP) ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzRLSzPpkAU02T3DnS27tcctfDBhPMhopUjfniSTyHrsUwPqGsibvAC9Z3y3_NPTZPm/exec';
+        const form = document.forms['rsvpForm'];
+        const btnKirim = document.getElementById('btnKirim');
+        const wishesList = document.getElementById('wishesList');
+
+        // 1. Fungsi Load Ucapan (GET)
+        async function loadWishes() {
+            try {
+                const response = await fetch(scriptURL);
+                const result = await response.json();
+                
+                if(result.result === 'success') {
+                    const wishes = result.data;
+                    wishesList.innerHTML = ''; // Kosongkan loading
+
+                    if(wishes.length === 0) {
+                        wishesList.innerHTML = '<p class="text-center text-gray-400 text-xs">Belum ada ucapan. Jadilah yang pertama!</p>';
+                        return;
+                    }
+
+                    wishes.forEach(wish => {
+                        // Format Tanggal
+                        const date = new Date(wish.timestamp);
+                        const dateStr = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+                        
+                        // Badge Warna
+                        const badgeClass = wish.kehadiran === 'Hadir' ? 'hadir' : 'tidak';
+                        const initial = wish.nama.charAt(0).toUpperCase();
+
+                        const html = `
+                            <div class="wish-card">
+                                <div class="flex gap-3">
+                                    <div class="wish-avatar">${initial}</div>
+                                    <div class="w-full">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="wish-name">${wish.nama}</h5>
+                                                <span class="wish-date">${dateStr}</span>
+                                            </div>
+                                            <span class="wish-badge ${badgeClass}">${wish.kehadiran}</span>
+                                        </div>
+                                        <p class="wish-message">"${wish.ucapan}"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        wishesList.innerHTML += html;
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading wishes:', error);
+                wishesList.innerHTML = '<p class="text-center text-red-400 text-xs">Gagal memuat ucapan.</p>';
+            }
+        }
+
+        // 2. Fungsi Kirim Ucapan (POST)
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btnKirim.disabled = true;
+            btnKirim.innerHTML = 'Mengirim...';
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    alert('Terima kasih! Ucapan Anda telah terkirim.');
+                    form.reset();
+                    loadWishes(); // Reload list setelah kirim
+                    btnKirim.disabled = false;
+                    btnKirim.innerHTML = 'Kirim Ucapan';
+                })
+                .catch(error => {
+                    alert('Maaf, terjadi kesalahan. Coba lagi nanti.');
+                    console.error('Error!', error.message);
+                    btnKirim.disabled = false;
+                    btnKirim.innerHTML = 'Kirim Ucapan';
+                });
+        });
+
+        // Load ucapan saat halaman dibuka
+        loadWishes();
+
+        // --- GUEST NAME LOGIC (URL PARAMETER) ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('to');
+        
+        if (guestName) {
+            // Update Nama di Cover
+            document.getElementById('guest-name').innerText = guestName;
+            
+            // Auto-fill Nama di Form RSVP (Opsional, agar tamu tidak perlu ketik ulang)
+            const rsvpNameInput = document.querySelector('input[name="nama"]');
+            if (rsvpNameInput) rsvpNameInput.value = guestName;
+        }
+
+        // --- PARTICLE ANIMATION SCRIPT ---
+        function createParticles() {
+            const container = document.getElementById('particles-js');
+            if (!container) return;
+            
+            const particleCount = 15; // Jumlah partikel
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size, position, and duration
+                const size = Math.random() * 3 + 2 + 'px';
+                particle.style.width = size;
+                particle.style.height = size;
+                particle.style.left = Math.random() * 90 + 5 + '%'; // Batasi agar tidak mepet pinggir (5% - 95%)
+                particle.style.animationDuration = Math.random() * 10 + 10 + 's'; // 10-20s
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+    </script>
+</body>
+</html>
